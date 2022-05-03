@@ -10,15 +10,11 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
-#include <fcntl.h>
-#include <stdio.h>
-#include <stdlib.h>
 #include "get_next_line.h"
 
 char	*ft_next_line(char *stach)
 {
-	char	*new_stach;
+	char	*new_stach = NULL;
 	int		i;
 	int		j;
 
@@ -28,7 +24,7 @@ char	*ft_next_line(char *stach)
 		i++;
 	if (!stach[i])
 		return (NULL);
-	new_stach = malloc(ft_strlen(stach) - i + 1 * sizeof(char));
+	new_stach = ft_calloc(ft_strlen(stach) - i + 1, sizeof(char));
 	i++;
 	while (stach[i])
 		new_stach[j++] = stach[i++];
@@ -47,7 +43,7 @@ char	*ft_line(char *stach)
 		return (NULL);
 	while (stach[i] && stach[i] != '\n')
 		i++;
-	line = malloc(i + 1 * sizeof(char));
+	line = ft_calloc(i + 1, sizeof(char));
 	i = 0;
 	while (stach[i] && stach[i] != '\n')
 	{
@@ -110,19 +106,19 @@ char	*get_next_line(int fd)
 	return (line);
 }
 
-// int main()
-// {
-// 	int fd;
-// 	char *line;
+ int main()
+ {
+ 	int fd;
+ 	char *line;
 
-// 	fd = open("text.txt", O_RDONLY);
-// 	while (1)
-// 	{
-// 		line = get_next_line(fd);
-// 		if (line == NULL)
-// 			break;
-// 		printf("%s", line);
-// 		free(line);
-// 	}
-// 	return (0);
-// }
+ 	fd = open("text.txt", O_RDONLY);
+ 	while (1)
+ 	{
+ 		line = get_next_line(fd);
+ 		if (line == NULL)
+ 			break;
+ 		printf("%s", line);
+ 		free(line);
+ 	}
+ 	return (0);
+ }
